@@ -29,28 +29,43 @@ def play_game
     puts "=============================================="
     puts ""
     
-    print "Please enter the correct letter you guessed: "
-    letter = gets.chomp
+    print "Did you correctly guess the letter? (y/n) "
+    input = gets.chomp
     puts ""
-    
-    #enter the number of characters
 
-    print "Please enter the correct position of the letter you guessed (starts at 1 ex. if the first letter was correct, put 1): "
-    position = gets.chomp.to_i
-    puts ""
-    #prints the potential matches    
+    if input == "y"
 
-    game.newletter(position, letter)
-    game.match_list(position, letter)
+      print "Please enter the correct letter you guessed: "
+      letter = gets.chomp
+      puts ""
 
-    display = game.curated
-    display = display.map {|a| a.join("")}
-    puts "These are the possible words: "
-    puts display
-    puts "=============================================="
+      print "Please enter the correct position of the letter you guessed (starts at 1 ex. if the first letter was correct, put 1): "
+      position = gets.chomp.to_i
+      puts ""
+
+      game.newletter(position, letter)
+      game.match_list(position, letter)
+
+      display = game.curated
+      display = display.map {|a| a.join("")}
+      puts "These are the possible words: "
+      puts display
+      puts "=============================================="
+
+    else
+      print "What letter did you guess? "
+      letter = gets.chomp
+      puts ""
+
+      game.wrong_letter(letter)
+
+      display = game.curated
+      display = display.map {|a| a.join("")}
+      puts "These are the possible words: "
+      puts display
+      puts "=============================================="
+    end
   end
-
-
 end
 
 play_game

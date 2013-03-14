@@ -6,6 +6,7 @@ attr_accessor :word, :word_list, :curated, :length, :letter, :position
   def initialize()
     file = File.open("/usr/share/dict/words")
     @word_list = file.read.split
+    #@word_list = ["samir", "shanze", "awesome", "pow"]
     @curated = []
   end
 
@@ -38,6 +39,14 @@ attr_accessor :word, :word_list, :curated, :length, :letter, :position
     @curated = matches
   end
 
+  def wrong_letter(letter)
+    for word in 0..(@curated.length-1)
+      if @curated[word].include?(letter)
+        @curated[word] = nil
+      end
+    end
+    @curated = @curated.compact!
+  end
 end
 
 #curated has the list of words you need!
@@ -45,8 +54,9 @@ end
 
     # game = Hangman_Solver.new
     # game.chars(5)
-    # game.newletter(1,"s")
-    # game.match_list(1,"s")
+    # # game.newletter(1,"s")
+    # # game.match_list(1,"s")
+    # game.wrong_letter("z")
     # p game.curated
     # game.newletter(5,"r")
     # game.match_list(5,"r")
